@@ -31,7 +31,7 @@ export const App = ({sdk}) => {
       'Content-Type': 'application/json',
     }
     axios.get(API_ENDPOINT, headers).then(response => {
-      setFieldOptions(response.data[0]);
+      setFieldOptions(response.data);
     });
   }, [])
 
