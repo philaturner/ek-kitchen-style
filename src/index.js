@@ -31,7 +31,7 @@ export const App = ({sdk}) => {
       'Content-Type': 'application/json',
     }
     axios.get(API_ENDPOINT, headers).then(response => {
-      setFieldOptions(response.json()[0]);
+      setFieldOptions(response.data[0]);
     });
   }, [])
 
@@ -50,10 +50,11 @@ export const App = ({sdk}) => {
         id={"kitchen-style"}
         name={"kitchen-style"}
         selectProps="large"
+        onChange={onChange}
         helpText="Add the associated Kitchen Style with this item"
     >
       {fieldOptions.map(item =>
-          <Option key={item.value} value={item.value}>{item.label}</Option>
+          <Option selected={item.value == value} key={item.value} value={item.value}>{item.label}</Option>
       )}
     </SelectField>
   );
