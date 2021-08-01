@@ -27,7 +27,10 @@ export const App = ({sdk}) => {
 
   useEffect(() => {
     const API_ENDPOINT = sdk.parameters.installation.apiEndpoint;
-    axios.get(API_ENDPOINT).then(response => {
+    const headers = {
+      'Content-Type': 'application/json',
+    }
+    axios.get(API_ENDPOINT, headers).then(response => {
       setFieldOptions(response.json()[0]);
     });
   }, [])
