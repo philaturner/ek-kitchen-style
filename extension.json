@@ -1,0 +1,18 @@
+{
+  "id": "ekitchens-kitchen-style",
+  "name": "ekitchens-kitchen-style",
+  "srcdoc": "./build/index.html",
+  "fieldTypes": [
+    "Symbol"
+  ],
+  "parameters" : {
+    "installation": [
+      {
+        "id": "apiEndpoint",
+        "name": "Api Endpoint",
+        "type": "Symbol",
+        "required": true
+      }
+    ]
+  }
+}
