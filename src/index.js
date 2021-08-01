@@ -5,9 +5,11 @@ import { SelectField, Option } from '@contentful/forma-36-react-components';
 import { init } from 'contentful-ui-extensions-sdk';
 import '@contentful/forma-36-react-components/dist/styles.css';
 import './index.css';
+import axios from "axios";
 
 export const App = ({sdk}) => {
   const [value, setValue] = useState(sdk.field.getValue() || '');
+  const [fieldOptions, setFieldOptions] = useState([]);
 
   const onExternalChange = value => {
     setValue(value);
@@ -24,6 +26,13 @@ export const App = ({sdk}) => {
   }
 
   useEffect(() => {
+    const API_ENDPOINT = sdk.parameters.installation.apiEndpoint;
+    axios.get(API_ENDPOINT).then(response => {
+      setFieldOptions(response.json()[0]);
+    });
+  }, [])
+
+  useEffect(() => {
     sdk.window.startAutoResizer();
   }, []);
 
@@ -37,12 +46,12 @@ export const App = ({sdk}) => {
     <SelectField
         id={"kitchen-style"}
         name={"kitchen-style"}
-        labelText={"Kitchen Style"}
         selectProps="large"
         helpText="Add the associated Kitchen Style with this item"
     >
-      <Option value="22">Phil Range</Option>
-      <Option value="26">Bob Range</Option>
+      {fieldOptions.map(item =>
+          <Option key={item.value} value={item.value}>{item.label}</Option>
+      )}
     </SelectField>
   );
 }
